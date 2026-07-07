@@ -16,8 +16,24 @@ if not st.session_state.login:
             st.error('Username / Password salah')
     st.stop()
 st.title('Dashboard Stok Pupuk')
-st.sidebar.file_uploader('Upload Excel JAN-MEI',type=['xlsx'])
-uploaded_file = st.sidebar.file_uploader(
+uploaded_file = 
+    key="upload_excel"
+)
+
+if uploaded_file is None:
+    st.info("Silakan upload file Excel.")
+    st.stop()
+
+sheet = st.sidebar.selectbox(
+    "Pilih Bulan",
+    ["JAN 26","FEB 26","MAR 26","APR 26","MEI 26"]
+)
+
+df = pd.read_excel(uploaded_file, sheet_name=sheet)
+
+st.success(f"Berhasil membaca {sheet}")
+
+st.dataframe(df)
     "Upload Excel JAN-MEI",
     type=["xlsx"]
 )
