@@ -60,14 +60,15 @@ sheet = st.sidebar.selectbox(
 try:
 
     df = pd.read_excel(
-        uploaded_file,
-        sheet_name=sheet
-    )
+    uploaded_file,
+    sheet_name=sheet,
+    header=2
+)
 
     st.success(f"Berhasil membaca sheet {sheet}")
 
-    st.dataframe(
-        df,
+    st.write(df.columns)
+st.dataframe(df)
         use_container_width=True
     )
 
