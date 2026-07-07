@@ -1,2 +1,1 @@
-# fims-karyamas
-Fertilizer Inventory Management System
+Template awal FIMS Streamlit
