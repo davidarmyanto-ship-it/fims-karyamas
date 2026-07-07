@@ -17,4 +17,31 @@ if not st.session_state.login:
     st.stop()
 st.title('Dashboard Stok Pupuk')
 st.sidebar.file_uploader('Upload Excel JAN-MEI',type=['xlsx'])
-st.info('Template awal.')
+uploaded_file = st.sidebar.file_uploader(
+    "Upload Excel JAN-MEI",
+    type=["xlsx"]
+)
+
+if uploaded_file is None:
+    st.info("Silakan upload file Excel.")
+    st.stop()
+
+sheet = st.sidebar.selectbox(
+    "Pilih Bulan",
+    ["JAN 26","FEB 26","MAR 26","APR 26","MEI 26"]
+)
+
+try:
+
+    df = pd.read_excel(
+        uploaded_file,
+        sheet_name=sheet
+    )
+
+    st.success(f"Sheet {sheet} berhasil dibaca")
+
+    st.write(df.head())
+
+except Exception as e:
+
+    st.error(e)
